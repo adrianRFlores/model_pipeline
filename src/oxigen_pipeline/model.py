@@ -9,7 +9,7 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.compose import ColumnTransformer
-from sklearn.base import clone
+from sklearn.base import clone, estimator_html_repr
 
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 from xgboost import XGBRegressor
@@ -84,6 +84,12 @@ def train_and_evaluate_model(X_train, X_val, X_test, y_train, y_val, y_test,
         ("model", base_model),
     ])
 
+    html_code = estimator_html_repr(pipe)
+
+    with open("pipeline_model_diagram.html", "w", encoding="utf-8") as f:
+        f.write(html_code)
+    
+
     # ⛔️ No pasar eval_set en CV (rompe con datos sin transformar)
     search = RandomizedSearchCV(
         pipe,
@@ -94,7 +100,6 @@ def train_and_evaluate_model(X_train, X_val, X_test, y_train, y_val, y_test,
         verbose=1,
         random_state=42,
         n_jobs=-1,
-        # error_score="raise",  # destapar si querés ver el primer error exacto
     )
     search.fit(X_train, y_train)
     best_model = search.best_estimator_
@@ -120,6 +125,10 @@ def train_and_evaluate_model(X_train, X_val, X_test, y_train, y_val, y_test,
 
         # 3) Reconstruir un pipeline con el preprocesador YA fit y el modelo YA fit
         best_model = Pipeline([("pre", pre_fitted), ("model", xgb_final)])
+        html_code = estimator_html_repr(best_model)
+
+        with open("pipeline_model_diagram.html", "w", encoding="utf-8") as f:
+            f.write(html_code)
 
     # ===== Validación
     y_val_pred = best_model.predict(X_val)
