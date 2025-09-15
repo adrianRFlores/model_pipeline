@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.6.0 (2025-09-15)
+
+### Features
+
+- Docker image builder
+  ([`3c993c3`](https://github.com/adrianRFlores/model_pipeline/commit/3c993c38d295d4f459c1fe45a9be677ac94b4de7))
+
+
 ## v1.5.0 (2025-09-01)
 
 
