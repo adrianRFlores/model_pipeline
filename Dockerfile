@@ -10,6 +10,8 @@ COPY pyproject.toml .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY src/ ./src/
+COPY final_dataset.csv ./data/final_dataset.csv
+
 RUN pip install --no-cache-dir .
 
-CMD ["python3"]
+CMD ["python3", "-m", "src.oxigen_pipeline", "/app/data/final_dataset.csv"]
