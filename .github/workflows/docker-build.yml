@@ -22,7 +22,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # Extract version from pyproject.toml (optional, but neat)
+      # Extract version from pyproject.toml
       - name: Get version
         id: get_version
         run: |
