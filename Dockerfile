@@ -14,4 +14,8 @@ COPY final_dataset.csv ./data/final_dataset.csv
 
 RUN pip install --no-cache-dir .
 
-CMD ["python3", "-m", "src.oxigen_pipeline", "/app/data/final_dataset.csv"]
+# Ensure output folder exists
+RUN mkdir -p /app/data
+
+# Run pipeline
+CMD ["oxigen-pipeline", "--data-path", "/app/data/final_dataset.csv", "--target", "AQI"]
