@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.6.1 (2025-09-15)
+
+### Bug Fixes
+
+- Python image version
+  ([`2a9e451`](https://github.com/adrianRFlores/model_pipeline/commit/2a9e451d406ca96498328f72c1166472c705956a))
+
+
 ## v1.6.0 (2025-09-15)
 
 ### Features
